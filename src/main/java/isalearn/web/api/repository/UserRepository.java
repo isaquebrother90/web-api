@@ -1,5 +1,7 @@
 package isalearn.web.api.repository;
 
+import isalearn.web.api.handler.BusinessException;
+import isalearn.web.api.handler.CampoObrigatorioException;
 import isalearn.web.api.model.Usuario;
 import org.springframework.stereotype.Repository;
 
@@ -9,6 +11,14 @@ import java.util.List;
 @Repository
 public class UserRepository {
     public void save(Usuario usuario){
+        if (usuario.getLogin()==null){
+            throw new CampoObrigatorioException("login");
+        }
+
+        if (usuario.getPassword()==null){
+            throw new CampoObrigatorioException("password");
+        }
+
         if(usuario.getId()==null)
             System.out.println("SAVE - Recebendo o usuário na camada de repositório");
         else

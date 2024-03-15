@@ -17,10 +17,12 @@ import java.util.List;
 public class UserController {
     @Autowired
     private UserRepository repository;
+
     @GetMapping
     public List<Usuario> list(){
         return repository.findAll();
     }
+
     @PostMapping
     public void save(@RequestBody Usuario usuario){
         repository.save(usuario);
