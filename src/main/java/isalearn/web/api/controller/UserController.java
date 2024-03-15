@@ -5,7 +5,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import isalearn.web.api.model.Usuario;
+import isalearn.web.api.model.User;
 import isalearn.web.api.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -19,30 +19,30 @@ public class UserController {
     private UserRepository repository;
 
     @GetMapping
-    public List<Usuario> list(){
+    public List<User> list(){
         return repository.findAll();
     }
 
     @PostMapping
-    public void save(@RequestBody Usuario usuario){
-        repository.save(usuario);
+    public void save(@RequestBody User user){
+        repository.save(user);
     }
     @PutMapping
-    public void update(@RequestBody Usuario usuario){
-        repository.save(usuario);
+    public void update(@RequestBody User user){
+        repository.save(user);
     }
 
     @Operation(summary = "Get a user by its username")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Found the user",
                     content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = Usuario.class)) }),
+                            schema = @Schema(implementation = User.class)) }),
             @ApiResponse(responseCode = "400", description = "Invalid username",
                     content = @Content),
             @ApiResponse(responseCode = "404", description = "User not found",
                     content = @Content) })
     @GetMapping("/{username}")
-    public Usuario find(@PathVariable("username") String username){
+    public User find(@PathVariable("username") String username){
         return repository.findByUsername(username);
     }
 
